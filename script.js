@@ -733,7 +733,6 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log("Contact form listener setup complete");
 });
 
-// Add this to your existing script.js file to ensure the interests section
 // animations work with your current fade-in effects
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -791,6 +790,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+
 
 
 
