@@ -95,9 +95,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const ctx = canvas.getContext('2d');
     let width, height;
     let particles = [];
-    const particleCount = 200;
-    const maxDistance = 120;
-    const mouseRadius = 150;
+    const particleCount = 100;
+    const maxDistance = 100;
+    const mouseRadius = 100;
 
     // Mouse position
     let mouse = {
