@@ -82,11 +82,11 @@ gsap.registerPlugin(ScrollTrigger);
 
 // Hero Animation
 gsap.from('.hero-content', {
-    duration: 1.2,
+    duration: 0.8,
     y: 30,
     opacity: 0,
     ease: 'power3.out',
-    delay: 0.5
+    delay: 0.1
 });
 
 // Network animation
@@ -723,11 +723,169 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
     });
+
+// Contact Form Functionality
+document.addEventListener('DOMContentLoaded', function() {
+    console.log("DOM fully loaded, initializing contact form");
     
-    // Check for saved custom theme on page load
-    // if (localStorage.getItem('custom-primary')) {
-    //     document.documentElement.style.setProperty('--primary', localStorage.getItem('custom-primary'));
-    //     document.documentElement.style.setProperty('--secondary', localStorage.getItem('custom-secondary'));
-    //     document.documentElement.style.setProperty('--accent', localStorage.getItem('custom-accent'));
-    // }
+    // Get the form element
+    const contactForm = document.getElementById('contact-form');
+    
+    // Debug check - make sure we found the form
+    if (!contactForm) {
+        console.error("Contact form not found!");
+        return;
+    }
+    
+    console.log("Contact form found, setting up listener");
+    
+    // Add submit event listener directly
+    contactForm.onsubmit = function(e) {
+        // Prevent the default form submission
+        e.preventDefault();
+        console.log("Form submission prevented");
+        
+        // Get the status element
+        const formStatus = document.getElementById('form-status');
+        
+        // Show sending status
+        formStatus.textContent = "Sending your message...";
+        formStatus.className = "form-status sending";
+        
+        // Get form data
+        const nameInput = document.getElementById('name');
+        const emailInput = document.getElementById('email');
+        const subjectInput = document.getElementById('subject');
+        const messageInput = document.getElementById('message');
+        
+        // Debug check - make sure we have all form fields
+        if (!nameInput || !emailInput || !subjectInput || !messageInput) {
+            console.error("Form fields not found!");
+            formStatus.textContent = "Form configuration error. Please contact me directly via email.";
+            formStatus.className = "form-status error";
+            return;
+        }
+        
+        // Without EmailJS for now, just show success after delay
+        setTimeout(function() {
+            console.log("Form would be submitted if EmailJS was configured");
+            formStatus.textContent = "Message sent successfully! I'll get back to you soon.";
+            formStatus.className = "form-status success";
+            
+            // Reset form
+            contactForm.reset();
+            
+            // Clear success message after 5 seconds
+            setTimeout(() => {
+                formStatus.className = "form-status";
+            }, 5000);
+        }, 1000);
+        
+        // UNCOMMENT AND CONFIGURE THIS SECTION WHEN READY TO USE EMAILJS
+        
+        // Initialize EmailJS with your user ID
+        emailjs.init("lQh14aIY4yuKN32hg"); // Replace with your actual EmailJS user ID
+        
+        // Send email using EmailJS
+        emailjs.send(
+            'service_7s5j7yd', // Replace with your EmailJS service ID
+            'template_8wlprff', // Replace with your EmailJS template ID
+            {
+                from_name: nameInput.value,
+                from_email: emailInput.value,
+                subject: subjectInput.value,
+                message: messageInput.value,
+                reply_to: emailInput.value
+            }
+        )
+        .then(function() {
+            // Success message
+            formStatus.textContent = "Message sent successfully! I'll get back to you soon.";
+            formStatus.className = "form-status success";
+            
+            // Reset form
+            contactForm.reset();
+            
+            // Clear success message after 5 seconds
+            setTimeout(() => {
+                formStatus.className = "form-status";
+            }, 5000);
+        })
+        .catch(function(error) {
+            // Error message
+            console.error('EmailJS error:', error);
+            formStatus.textContent = "Oops! Something went wrong. Please try again or contact me directly via email.";
+            formStatus.className = "form-status error";
+        });
+        
+        
+        // Return false to ensure the form doesn't submit
+        return false;
+    };
+    
+    console.log("Contact form listener setup complete");
+});
+
+// Add this to your existing script.js file to ensure the interests section
+// animations work with your current fade-in effects
+
+document.addEventListener('DOMContentLoaded', () => {
+    const fadeElements = document.querySelectorAll('.fade-in');
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                
+                // Special handling for interest items to make them appear with delay
+                if (entry.target.classList.contains('interests-container')) {
+                    const interestItems = entry.target.querySelectorAll('.interest-item');
+                    interestItems.forEach((item, index) => {
+                        setTimeout(() => {
+                            item.style.opacity = 1;
+                            item.style.transform = 'translateY(0)';
+                        }, 100 * (index + 1));
+                    });
+                }
+            }
+        });
+    }, { threshold: 0.1 });
+
+    fadeElements.forEach(element => {
+        observer.observe(element);
+    });
+    
+    // Add tooltip positioning adjustment for screen edges
+    const interestItems = document.querySelectorAll('.interest-item');
+    
+    interestItems.forEach(item => {
+        item.addEventListener('mouseenter', () => {
+            const tooltip = item.querySelector('.interest-tooltip');
+            const rect = tooltip.getBoundingClientRect();
+            
+            // Adjust if tooltip goes off the left edge
+            if (rect.left < 10) {
+                tooltip.style.left = '0';
+                tooltip.style.transform = 'translateX(0) scale(1)';
+            }
+            
+            // Adjust if tooltip goes off the right edge
+            if (rect.right > window.innerWidth - 10) {
+                tooltip.style.left = '100%';
+                tooltip.style.transform = 'translateX(-100%) scale(1)';
+            }
+        });
+        
+        // Reset position on mouseleave
+        item.addEventListener('mouseleave', () => {
+            const tooltip = item.querySelector('.interest-tooltip');
+            tooltip.style.left = '50%';
+            tooltip.style.transform = 'translateX(-50%) scale(0.8)';
+        });
+    });
+});
+
+
+
+
 });

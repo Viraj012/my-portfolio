@@ -1,11 +1,11 @@
 :root {
     --primary: #F96167;
-    --secondary: #fae482;
-    --accent: #9b59b6;
+    --secondary: #f6e182;
+    --accent: #c48fd9;
     --text-primary: #e6e6e6;
     --text-secondary: #b5b5b5;
     --bg-primary: #121212;
-    --bg-secondary: #1e1e1e;
+    --bg-secondary: #121212;
     --card-bg: #252525;
     --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
     --transition: all 0.3s ease;
@@ -13,12 +13,12 @@
 
 .light-mode {
     --primary: #F96167;
-    --secondary: #fae482;
+    --secondary: #f6e182;;
     --accent: #9b59b6;
     --text-primary: #333;
     --text-secondary: #555;
-    --bg-primary: #fff;
-    --bg-secondary: #f8f9fa;
+    --bg-primary: #ffffff92;
+    --bg-secondary: #ffffff92;
     --card-bg: #fff;
     --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
@@ -184,7 +184,7 @@ header {
 
 /* Hero Section */
 .hero {
-    height: 90vh;
+    height: 100vh;
     display: flex;
     align-items: center;
     position: relative;
@@ -217,13 +217,14 @@ header {
 }
 
 .hero-title {
-    font-size: 4.5rem;
+    font-size: 4rem;
     margin-bottom: 1.5rem;
     line-height: 1.2;
     background: linear-gradient(to right, var(--primary), var(--secondary));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     font-weight: 700;
+    white-space: nowrap;
 }
 
 .hero-subtitle {
@@ -331,6 +332,9 @@ header {
     margin-right: 0.8rem;
 }
 
+.skills .skill-category:hover h3 {
+    color: var(--secondary) !important;
+}
 /* Experience Section */
 .experience {
     background-color: var(--bg-secondary);
@@ -461,6 +465,8 @@ header {
 .project-title {
     font-size: 1.5rem;
     margin-bottom: 1rem;
+    color: var(--primary);
+    transition: color 0.3s ease;
 }
 
 .project-tags {
@@ -504,6 +510,10 @@ header {
 
 .project-link:hover {
     color: var(--secondary);
+}
+
+.projects .project-card:hover .project-title {
+    color: var(--secondary) !important;
 }
 
 /* Resume Section */
@@ -600,6 +610,39 @@ textarea.form-control {
 .submit-btn:hover {
     background-color: var(--secondary);
     transform: translateY(-3px);
+}
+
+.submit-btn:hover {
+    background-color: var(--secondary);
+    transform: translateY(-3px);
+}
+
+.form-status {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: 500;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.form-status.success {
+    background-color: rgba(39, 174, 96, 0.1);
+    color: #27ae60;
+    opacity: 1;
+}
+
+.form-status.error {
+    background-color: rgba(231, 76, 60, 0.1);
+    color: #e74c3c;
+    opacity: 1;
+}
+
+.form-status.sending {
+    background-color: rgba(52, 152, 219, 0.1);
+    color: #3498db;
+    opacity: 1;
 }
 
 /* Footer */
@@ -1003,3 +1046,171 @@ footer {
 .project-card:hover .project-link:nth-child(2) {
     transition-delay: 0.1s;
 }
+
+
+/* Updated interests section styling */
+
+.interests-container {
+    margin: 3rem 0;
+    text-align: center;
+    width: 100%;
+    max-width: 100%;
+}
+
+.interests-container h3 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: var(--primary);
+    display: inline-block;
+    position: relative;
+}
+
+.interests-intro {
+    margin-bottom: 2rem;
+    color: var(--text-secondary);
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.interests-icons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: center;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.interest-item {
+    position: relative;
+}
+
+.interest-icon {
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    background-color: var(--card-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    box-shadow: var(--card-shadow);
+    cursor: pointer;
+    position: relative;
+    z-index: 2;
+    border: 2px solid transparent;
+}
+
+.interest-icon i {
+    font-size: 1.7rem;
+    color: var(--primary);
+    transition: all 0.3s ease;
+}
+
+.interest-tooltip {
+    position: absolute;
+    bottom: calc(100% + 15px);
+    left: 50%;
+    transform: translateX(-50%) scale(0.8);
+    width: 220px;
+    background-color: var(--card-bg);
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: var(--card-shadow);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 10;
+    pointer-events: none;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.interest-tooltip::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%) rotate(45deg);
+    width: 16px;
+    height: 16px;
+    background-color: var(--card-bg);
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.interest-tooltip h4 {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    color: var(--primary);
+}
+
+.interest-tooltip p {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+.interest-item:hover .interest-icon {
+    transform: translateY(-5px);
+    background-color: var(--bg-primary);
+    border: 2px solid var(--primary);
+}
+
+.interest-item:hover .interest-icon i {
+    color: var(--primary);
+    transform: scale(1.1);
+}
+
+.interest-item:hover .interest-tooltip {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) scale(1);
+}
+
+/* Staggered animations - make these subtle */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.interests-container.visible .interest-item {
+    opacity: 0;
+    animation: fadeInUp 0.4s ease forwards;
+}
+
+.interests-container.visible .interest-item:nth-child(1) { animation-delay: 0.05s; }
+.interests-container.visible .interest-item:nth-child(2) { animation-delay: 0.1s; }
+.interests-container.visible .interest-item:nth-child(3) { animation-delay: 0.15s; }
+.interests-container.visible .interest-item:nth-child(4) { animation-delay: 0.2s; }
+.interests-container.visible .interest-item:nth-child(5) { animation-delay: 0.25s; }
+.interests-container.visible .interest-item:nth-child(6) { animation-delay: 0.3s; }
+.interests-container.visible .interest-item:nth-child(7) { animation-delay: 0.35s; }
+.interests-container.visible .interest-item:nth-child(8) { animation-delay: 0.4s; }
+.interests-container.visible .interest-item:nth-child(9) { animation-delay: 0.45s; }
+.interests-container.visible .interest-item:nth-child(10) { animation-delay: 0.5s; }
+
+/* Make the interest icons more responsive */
+@media (max-width: 768px) {
+    .interests-icons {
+        gap: 1rem;
+    }
+    
+    .interest-icon {
+        width: 3.5rem;
+        height: 3.5rem;
+    }
+    
+    .interest-icon i {
+        font-size: 1.4rem;
+    }
+}
+
+
