@@ -17,9 +17,9 @@ document.addEventListener('DOMContentLoaded', function() {
     container.innerHTML = '';
     
     // Add some clearance space to container
-    container.style.marginTop = '180px';
-    container.style.marginBottom = '100px';
-    container.style.height = '150px';
+    container.style.marginTop = '50px';
+    container.style.marginBottom = '50px';
+    container.style.height = '50px';
     
     // Create a carousel track
     const track = document.createElement('div');

@@ -1121,6 +1121,24 @@ footer {
     position: relative;
 }
 
+.interests {
+    min-height: auto; /* Instead of any fixed height that might be set */
+}
+
+.interests.section {
+    padding: 3rem 0; /* Reduced from 5rem */
+}
+
+/* Adjust the margin on the interests intro text */
+.interests-intro {
+    margin-bottom: 1rem; /* Reduced from 2rem */
+}
+
+/* Make the section title closer to the intro text */
+.interests .section-title {
+    margin-bottom: 1.5rem; /* Reduced from 3rem */
+}
+
 .interest-icon {
     width: 4rem;
     height: 4rem;
